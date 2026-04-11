@@ -65,7 +65,7 @@ Se permite reutilizar código de internet, citando las fuentes. El trabajo es in
 
 - **Frontend**: React con Tailwind CSS para estilos.
 - **Gestión de estado y persistencia**: Zustand (recomendado) o Context API con localStorage.
-- **API**: Usar https://fakestoreapi.com/ para datos de productos y usuarios (perfecta para ecommerce).
+- **API**: Usar https://fake-store-api-docs.vercel.app/ para datos de productos y usuarios (perfecta para ecommerce).
 - **Backend (Bonus)**: Firebase (Authentication, Firestore) para estudiantes que quieran ir más allá.
 
 ---
@@ -148,7 +148,6 @@ Se permite reutilizar código de internet, citando las fuentes. El trabajo es in
   │   ├── molecules/   (cards de producto, form de búsqueda)
   │   ├── organisms/   (header, footer, galería)
   │   └── templates/   (layouts de páginas)
-  ├── pages/
   ├── mockdata/
   ├── store/           (Zustand stores)
   └── styles/
@@ -231,7 +230,7 @@ Se permite reutilizar código de internet, citando las fuentes. El trabajo es in
 - Commits: "fix: responsive design en móvil", "fix: responsive design en tablet"
 
 ### Paso 13: Conectar API Real (Opcional)
-- Una vez que todo funciona con mockdata, reemplaza con la API real: https://fakestoreapi.com/
+- Una vez que todo funciona con mockdata, reemplaza con la API real: https://fake-store-api-docs.vercel.app/
 - Endpoints disponibles:
   - `GET /products` - Obtener todos los productos
   - `GET /products/{id}` - Obtener producto específico
@@ -278,7 +277,7 @@ Se permite reutilizar código de internet, citando las fuentes. El trabajo es in
 - **Tailwind CSS**: https://tailwindcss.com/
 - **Zustand (State Management)**: https://zustand.docs.pmnd.rs/
 - **Plantillas de Referencia**: https://themewagon.com/
-- **FakeStore API**: https://fakestoreapi.com/ (API perfecta para ecommerce)
+- **FakeStore API**: https://fake-store-api-docs.vercel.app/ (API perfecta para ecommerce)
 - **Firebase (Bonus)**: https://firebase.google.com/docs
 - **Atomic Design**: https://bradfrost.com/blog/post/atomic-web-design/
 - **Diseño Responsivo**: https://developer.mozilla.org/es/docs/Learn/CSS/CSS_layout/Responsive_Design
@@ -326,7 +325,7 @@ Reusing code from the internet is allowed, citing sources. The work is individua
 
 - **Frontend**: React with Tailwind CSS for styling.
 - **State management and persistence**: Zustand (recommended) or Context API with localStorage.
-- **API**: Use https://fakestoreapi.com/ for product and user data (perfect for ecommerce).
+- **API**: Use https://fake-store-api-docs.vercel.app/ for product and user data (perfect for ecommerce).
 - **Backend (Bonus)**: Firebase (Authentication, Firestore) for students who want to go further.
 
 ---
@@ -415,7 +414,6 @@ Reusing code from the internet is allowed, citing sources. The work is individua
   │   ├── molecules/   (product cards, search form)
   │   ├── organisms/   (header, footer, gallery)
   │   └── templates/   (page layouts)
-  ├── pages/
   ├── mockdata/
   ├── store/           (Zustand stores)
   └── styles/
@@ -498,7 +496,7 @@ Reusing code from the internet is allowed, citing sources. The work is individua
 - Commits: "fix: responsive design on mobile", "fix: responsive design on tablet"
 
 ### Step 13: Connect Real API (Optional)
-- Once everything works with mockdata, replace with the real API: https://fakestoreapi.com/
+- Once everything works with mockdata, replace with the real API: https://fake-store-api-docs.vercel.app/
 - Available endpoints:
   - `GET /products` - Get all products
   - `GET /products/{id}` - Get specific product
@@ -545,7 +543,7 @@ Reusing code from the internet is allowed, citing sources. The work is individua
 - **Tailwind CSS**: https://tailwindcss.com/
 - **Zustand (State Management)**: https://zustand.docs.pmnd.rs/
 - **Reference Templates**: https://themewagon.com/
-- **FakeStore API**: https://fakestoreapi.com/ (Perfect API for ecommerce)
+- **FakeStore API**: https://fake-store-api-docs.vercel.app/ (Perfect API for ecommerce)
 - **Firebase (Bonus)**: https://firebase.google.com/docs
 - **Atomic Design**: https://bradfrost.com/blog/post/atomic-web-design/
 - **Responsive Design**: https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design
