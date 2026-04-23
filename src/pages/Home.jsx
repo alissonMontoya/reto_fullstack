@@ -7,7 +7,7 @@ export default function Home() {
   const [search, setSearch] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
 
-  const productsPerPage = 2 // 👈 puedes cambiar a 6 luego
+  const productsPerPage = 2
 
   // 🔍 FILTRO
   const filteredProducts = products.filter((p) =>
@@ -25,9 +25,20 @@ export default function Home() {
     <div>
       <h1>Productos</h1>
 
-      <Link to="/cart">
-        <button>Ir al carrito</button>
-      </Link>
+      {/* 🔗 NAVEGACIÓN */}
+      <div style={{ marginBottom: "10px" }}>
+        <Link to="/cart">
+          <button>Carrito</button>
+        </Link>
+
+        <Link to="/login">
+          <button>Login</button>
+        </Link>
+
+        <Link to="/register">
+          <button>Registro</button>
+        </Link>
+      </div>
 
       {/* 🔍 BUSCADOR */}
       <input
@@ -36,8 +47,9 @@ export default function Home() {
         value={search}
         onChange={(e) => {
           setSearch(e.target.value)
-          setCurrentPage(1) // resetear página
+          setCurrentPage(1)
         }}
+        style={{ marginBottom: "10px", padding: "5px" }}
       />
 
       {/* 🛍️ PRODUCTOS */}
@@ -48,12 +60,16 @@ export default function Home() {
           gap: "10px",
         }}
       >
-        {currentProducts.map((p) => (
-          <ProductCard key={p.id} product={p} />
-        ))}
+        {currentProducts.length === 0 ? (
+          <p>No se encontraron productos</p>
+        ) : (
+          currentProducts.map((p) => (
+            <ProductCard key={p.id} product={p} />
+          ))
+        )}
       </div>
 
-      {/* 📄 BOTONES PAGINACIÓN */}
+      {/* 📄 PAGINACIÓN */}
       <div style={{ marginTop: "20px" }}>
         <button
           onClick={() => setCurrentPage(currentPage - 1)}
