@@ -82,6 +82,20 @@ export default function Home() {
           Siguiente ➡
         </button>
       </div>
+
+      <div style={{ marginBottom: "10px" }}>
+  <Link to="/cart">
+    <button>Carrito</button>
+  </Link>
+
+  <Link to="/login">
+    <button>Login</button>
+  </Link>
+
+  <Link to="/register">
+    <button>Registro</button>
+  </Link>
+</div>
     </div>
   )
 }
