@@ -44,3 +44,10 @@ export default function Cart() {
     </div>
   )
 }
+
+<div style={{
+  border: "1px solid #ccc",
+  margin: "10px 0",
+  padding: "10px",
+  borderRadius: "8px"
+}}></div>
