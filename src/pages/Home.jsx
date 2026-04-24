@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import ProductCard from "../components/molecules/ProductCard"
 import { Link } from "react-router-dom"
+<ProductCard key={p.id} product={p} />
 
 export default function Home() {
   const [products, setProducts] = useState([])
