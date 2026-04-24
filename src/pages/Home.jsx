@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import ProductCard from "../components/molecules/ProductCard"
-import { Link } from "react-router-dom"
-<ProductCard key={p.id} product={p} />
 
 export default function Home() {
   const [products, setProducts] = useState([])
@@ -11,9 +9,10 @@ export default function Home() {
 
   const productsPerPage = 6
 
-  // 🔄 CONSUMO DE API
+  // 🔄 TRAER PRODUCTOS (API)
   useEffect(() => {
-    axios.get("https://fakestoreapi.com/products")
+    axios
+      .get("https://fakestoreapi.com/products")
       .then((res) => setProducts(res.data))
       .catch((err) => console.error(err))
   }, [])
@@ -34,12 +33,7 @@ export default function Home() {
     <div>
       <h1>Productos</h1>
 
-      {/* NAVEGACIÓN */}
-      <Link to="/cart">
-        <button>Carrito</button>
-      </Link>
-
-      {/* BUSCADOR */}
+      {/* 🔍 BUSCADOR */}
       <input
         type="text"
         placeholder="Buscar producto..."
@@ -48,23 +42,33 @@ export default function Home() {
           setSearch(e.target.value)
           setCurrentPage(1)
         }}
+        style={{
+          padding: "8px",
+          marginBottom: "15px",
+          width: "100%",
+          maxWidth: "300px"
+        }}
       />
 
-      {/* PRODUCTOS */}
+      {/* 🛍️ PRODUCTOS */}
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "10px",
+          gap: "15px"
         }}
       >
-        {currentProducts.map((p) => (
-          <ProductCard key={p.id} product={p} />
-        ))}
+        {currentProducts.length === 0 ? (
+          <p>Cargando productos...</p>
+        ) : (
+          currentProducts.map((p) => (
+            <ProductCard key={p.id} product={p} />
+          ))
+        )}
       </div>
 
-      {/* PAGINACIÓN */}
-      <div>
+      {/* 📄 PAGINACIÓN */}
+      <div style={{ marginTop: "20px" }}>
         <button
           onClick={() => setCurrentPage(currentPage - 1)}
           disabled={currentPage === 1}
@@ -72,8 +76,8 @@ export default function Home() {
           ⬅ Anterior
         </button>
 
-        <span>
-          Página {currentPage} de {totalPages}
+        <span style={{ margin: "0 10px" }}>
+          Página {currentPage} de {totalPages || 1}
         </span>
 
         <button
@@ -83,20 +87,6 @@ export default function Home() {
           Siguiente ➡
         </button>
       </div>
-
-      <div style={{ marginBottom: "10px" }}>
-  <Link to="/cart">
-    <button>Carrito</button>
-  </Link>
-
-  <Link to="/login">
-    <button>Login</button>
-  </Link>
-
-  <Link to="/register">
-    <button>Registro</button>
-  </Link>
-</div>
     </div>
   )
 }
