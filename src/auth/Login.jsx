@@ -22,9 +22,7 @@ export default function Login() {
     <form onSubmit={handleLogin}>
       <input onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
       <input onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-      <button>
-        style={{ width: "100%" }}
-        Iniciar sesión</button>
+      <button>Iniciar sesión</button>
     </form>
   )
 }

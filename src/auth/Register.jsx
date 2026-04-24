@@ -21,9 +21,7 @@ export default function Register() {
     <form onSubmit={handleRegister}>
       <input onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
       <input onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-      <button>
-        style={{ width: "100%" }}
-        Registrarse</button>
+      <button>Registrarse</button>
     </form>
   )
 }

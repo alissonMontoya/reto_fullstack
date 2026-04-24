@@ -24,14 +24,11 @@ export default function Cart() {
           <p>Cantidad: {item.quantity}</p>
 
           <button onClick={() => removeFromCart(item.id)}>
-            style={{ width: "100%" }}
             ❌ Eliminar
           </button>
          
           <Link to="/checkout">
-        <button>
-            style={{ width: "100%" }}
-            Ir a pagar</button>
+        <button> Ir a pagar</button>
         </Link>
         
         </div>

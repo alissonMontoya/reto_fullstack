@@ -14,8 +14,7 @@ export default function Navbar() {
 
       <div style={{ display: "flex", gap: "10px" }}>
         <Link to="/"><button className="btn">Inicio</button></Link>
-        <Link to="/cart"><button className="btn"> style={{ width: "100%" }} 
-          Carrito</button></Link>
+        <Link to="/cart"><button className="btn">Carrito</button></Link>
         <Link to="/login"><button className="btn">Login</button></Link>
       </div>
     </nav>

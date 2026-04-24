@@ -20,8 +20,7 @@ export default function ProductCard({ product }) {
       <p style={{ fontWeight: "bold" }}>${product.price}</p>
 
       <button className="btn">
-        style={{ width: "100%" }}
-        Agregar al carrito
+      Agregar al carrito
       </button>
     </div>
   )
