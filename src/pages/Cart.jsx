@@ -26,7 +26,7 @@ export default function Cart() {
           <button onClick={() => removeFromCart(item.id)}>
             ❌ Eliminar
           </button>
-
+         
           <Link to="/checkout">
         <button>Ir a pagar</button>
         </Link>
@@ -34,6 +34,13 @@ export default function Cart() {
         </div>
         
       ))}
+
+      <div style={{ padding: "10px" }}></div>
+      <div style={{
+      border: "1px solid gray",
+      margin: "10px 0",
+      padding: "10px"
+     }}></div>
     </div>
   )
 }

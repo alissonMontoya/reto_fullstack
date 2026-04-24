@@ -40,6 +40,7 @@ export default function Home() {
         </Link>
       </div>
 
+
       {/* 🔍 BUSCADOR */}
       <input
         type="text"
@@ -54,11 +55,17 @@ export default function Home() {
 
       {/* 🛍️ PRODUCTOS */}
       <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "10px",
-        }}
+
+      style={{
+         display: "grid",
+         gridTemplateColumns:
+         window.innerWidth < 600
+         ? "1fr"
+         : window.innerWidth < 900
+        ? "1fr 1fr"
+        : "1fr 1fr 1fr",
+        gap: "10px",
+}}
       >
         {currentProducts.length === 0 ? (
           <p>No se encontraron productos</p>
@@ -89,6 +96,8 @@ export default function Home() {
           Siguiente ➡
         </button>
       </div>
+      
+      <div className="grid"></div>
     </div>
   )
 }
