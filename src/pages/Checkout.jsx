@@ -1,4 +1,6 @@
 import { useCartStore } from "../store/cartStore"
+import { db } from "../firebase"
+import { collection, addDoc } from "firebase/firestore"
 
 export default function Checkout() {
   const cart = useCartStore((state) => state.cart)
@@ -8,30 +10,29 @@ export default function Checkout() {
     0
   )
 
+  const handleBuy = async () => {
+    try {
+      await addDoc(collection(db, "orders"), {
+        cart,
+        total,
+        date: new Date()
+      })
+
+      alert("Compra guardada en Firestore ✅")
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <div>
-      <h1>Resumen de compra</h1>
+      <h1>Checkout</h1>
 
-      {cart.length === 0 ? (
-        <p>No hay productos en el carrito</p>
-      ) : (
-        <>
-          {cart.map((item) => (
-            <div key={item.id}>
-              <h3>{item.title}</h3>
-              <p>Precio: ${item.price}</p>
-              <p>Cantidad: {item.quantity}</p>
-              <p>Subtotal: ${item.price * item.quantity}</p>
-            </div>
-          ))}
+      <p>Total: ${total}</p>
 
-          <h2>Total: ${total}</h2>
-
-          <button onClick={() => alert("Compra realizada ✅")}>
-            Finalizar compra
-          </button>
-        </>
-      )}
+      <button onClick={handleBuy}>
+        Finalizar compra
+      </button>
     </div>
   )
 }

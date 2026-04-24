@@ -1,47 +1,27 @@
 import { useState } from "react"
+import { auth } from "../firebase"
+import { createUserWithEmailAndPassword } from "firebase/auth"
 
 export default function Register() {
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  })
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
-  const handleChange = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  const handleSubmit = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault()
 
-    localStorage.setItem("user", JSON.stringify(user))
-
-    alert("Usuario registrado")
+    try {
+      await createUserWithEmailAndPassword(auth, email, password)
+      alert("Usuario registrado")
+    } catch (error) {
+      alert(error.message)
+    }
   }
 
   return (
-    <div>
-      <h1>Registro</h1>
-
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Correo"
-          onChange={handleChange}
-        />
-
-        <input
-          type="password"
-          name="password"
-          placeholder="Contraseña"
-          onChange={handleChange}
-        />
-
-        <button type="submit">Registrarse</button>
-      </form>
-    </div>
+    <form onSubmit={handleRegister}>
+      <input onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+      <input onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+      <button>Registrarse</button>
+    </form>
   )
 }
