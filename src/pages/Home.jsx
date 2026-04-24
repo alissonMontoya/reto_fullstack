@@ -87,6 +87,7 @@ export default function Home() {
           Siguiente ➡
         </button>
       </div>
+      <div className="grid"></div>
     </div>
   )
 }

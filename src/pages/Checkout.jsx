@@ -31,6 +31,7 @@ export default function Checkout() {
       <p>Total: ${total}</p>
 
       <button onClick={handleBuy}>
+        style={{ width: "100%" }}
         Finalizar compra
       </button>
     </div>
