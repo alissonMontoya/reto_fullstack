@@ -1,4 +1,5 @@
 import { useCartStore } from "../store/cartStore"
+import { Link } from "react-router-dom"
 
 export default function Cart() {
   const cart = useCartStore((state) => state.cart)
@@ -25,7 +26,13 @@ export default function Cart() {
           <button onClick={() => removeFromCart(item.id)}>
             ❌ Eliminar
           </button>
+
+          <Link to="/checkout">
+        <button>Ir a pagar</button>
+        </Link>
+        
         </div>
+        
       ))}
     </div>
   )
