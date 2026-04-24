@@ -116,3 +116,19 @@ body {
   text-align: center;
 }
 
+.btn {
+  background: black;
+  color: white;
+  padding: 10px;
+  border-radius: 6px;
+  width: auto;
+}
+
+/* 📱 móvil */
+@media (max-width: 600px) {
+  .btn {
+    width: 100%;
+    font-size: 16px;
+  }
+}
+
