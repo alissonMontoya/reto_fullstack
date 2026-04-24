@@ -1,13 +1,21 @@
-import { useState } from "react"
-import { products } from "../mockdata/products"
+import { useState, useEffect } from "react"
+import axios from "axios"
 import ProductCard from "../components/molecules/ProductCard"
 import { Link } from "react-router-dom"
 
 export default function Home() {
+  const [products, setProducts] = useState([])
   const [search, setSearch] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
 
-  const productsPerPage = 2
+  const productsPerPage = 6
+
+  // 🔄 CONSUMO DE API
+  useEffect(() => {
+    axios.get("https://fakestoreapi.com/products")
+      .then((res) => setProducts(res.data))
+      .catch((err) => console.error(err))
+  }, [])
 
   // 🔍 FILTRO
   const filteredProducts = products.filter((p) =>
@@ -25,23 +33,12 @@ export default function Home() {
     <div>
       <h1>Productos</h1>
 
-      {/* 🔗 NAVEGACIÓN */}
-      <div style={{ marginBottom: "10px" }}>
-        <Link to="/cart">
-          <button>Carrito</button>
-        </Link>
+      {/* NAVEGACIÓN */}
+      <Link to="/cart">
+        <button>Carrito</button>
+      </Link>
 
-        <Link to="/login">
-          <button>Login</button>
-        </Link>
-
-        <Link to="/register">
-          <button>Registro</button>
-        </Link>
-      </div>
-
-
-      {/* 🔍 BUSCADOR */}
+      {/* BUSCADOR */}
       <input
         type="text"
         placeholder="Buscar producto..."
@@ -50,34 +47,23 @@ export default function Home() {
           setSearch(e.target.value)
           setCurrentPage(1)
         }}
-        style={{ marginBottom: "10px", padding: "5px" }}
       />
 
-      {/* 🛍️ PRODUCTOS */}
+      {/* PRODUCTOS */}
       <div
-
-      style={{
-         display: "grid",
-         gridTemplateColumns:
-         window.innerWidth < 600
-         ? "1fr"
-         : window.innerWidth < 900
-        ? "1fr 1fr"
-        : "1fr 1fr 1fr",
-        gap: "10px",
-}}
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "10px",
+        }}
       >
-        {currentProducts.length === 0 ? (
-          <p>No se encontraron productos</p>
-        ) : (
-          currentProducts.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))
-        )}
+        {currentProducts.map((p) => (
+          <ProductCard key={p.id} product={p} />
+        ))}
       </div>
 
-      {/* 📄 PAGINACIÓN */}
-      <div style={{ marginTop: "20px" }}>
+      {/* PAGINACIÓN */}
+      <div>
         <button
           onClick={() => setCurrentPage(currentPage - 1)}
           disabled={currentPage === 1}
@@ -85,7 +71,7 @@ export default function Home() {
           ⬅ Anterior
         </button>
 
-        <span style={{ margin: "0 10px" }}>
+        <span>
           Página {currentPage} de {totalPages}
         </span>
 
@@ -96,8 +82,6 @@ export default function Home() {
           Siguiente ➡
         </button>
       </div>
-      
-      <div className="grid"></div>
     </div>
   )
 }
