@@ -1,8 +1,6 @@
 import { useState } from "react"
 
-
-
-export default function Register() {
+const Register = () => {
   const [form, setForm] = useState({
     nombre: "",
     apellido: "",
@@ -19,21 +17,32 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(form)
+
+    if (!form.nombre || !form.apellido || !form.email || !form.password) {
+      alert("Todos los campos son obligatorios")
+      return
+    }
+
+    if (form.password.length < 6) {
+      alert("La contraseña debe tener mínimo 6 caracteres")
+      return
+    }
+
+    console.log("Registro:", form)
+    alert("Usuario registrado correctamente 🎉")
   }
 
   return (
-    <div className="form-container">
-      <form onSubmit={handleSubmit} className="form">
-        <h2>Crear cuenta</h2>
+    <div>
+      <h2>Crear cuenta</h2>
 
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="nombre"
           placeholder="Nombre"
           value={form.nombre}
           onChange={handleChange}
-          className="input"
         />
 
         <input
@@ -42,16 +51,15 @@ export default function Register() {
           placeholder="Apellido"
           value={form.apellido}
           onChange={handleChange}
-          className="input"
         />
 
         <input
           type="email"
           name="email"
-          placeholder="Correo electrónico"
+          placeholder="Correo"
           value={form.email}
           onChange={handleChange}
-          className="input"
+
         />
 
         <input
@@ -60,34 +68,14 @@ export default function Register() {
           placeholder="Contraseña"
           value={form.password}
           onChange={handleChange}
-          className="input"
+          
         />
 
-        <button className="btn">Registrarse</button>
+
+        <button type="submit">Registrarse</button>
       </form>
     </div>
   )
 }
-<input
-  type="password"
-  name="confirmPassword"
-  placeholder="Confirmar contraseña"
-  className="input"
-/>
-const handleSubmit = (e) => {
-  e.preventDefault()
 
-  // 🔒 VALIDACIÓN
-  if (form.password.length < 6) {
-    alert("La contraseña debe tener mínimo 6 caracteres")
-    return
-  }
-
-  // ✅ SI PASA VALIDACIÓN
-  console.log(form)
-}
-
-if (!form.email.includes("@")) {
-  alert("Correo inválido")
-  return
-}
+export default Register

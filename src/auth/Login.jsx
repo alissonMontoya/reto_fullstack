@@ -1,28 +1,55 @@
 import { useState } from "react"
-import { auth } from "../firebase"
-import { signInWithEmailAndPassword } from "firebase/auth"
 
+const Login = () => {
+  const [form, setForm] = useState({
+    email: "",
+    password: ""
+  })
 
-export default function Login() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
+  }
 
-  const handleLogin = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
 
-    try {
-      await signInWithEmailAndPassword(auth, email, password)
-      alert("Login exitoso")
-    } catch (error) {
-      alert("Error en login")
+    if (!form.email || !form.password) {
+      alert("Completa todos los campos")
+      return
     }
+
+    console.log("Login:", form)
+    alert("Inicio de sesión exitoso")
   }
 
   return (
-    <form onSubmit={handleLogin}>
-      <input onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-      <input onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-      <button>Iniciar sesión</button>
-    </form>
+    <div>
+      <h2>Iniciar sesión</h2>
+
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          name="email"
+          placeholder="Correo"
+          value={form.email}
+          onChange={handleChange}
+        />
+
+        <input
+          type="password"
+          name="password"
+          placeholder="Contraseña"
+          value={form.password}
+          onChange={handleChange}
+        />
+
+        <button type="submit">Entrar</button>
+      </form>
+    </div>
   )
 }
+
+export default Login
