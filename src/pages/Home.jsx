@@ -4,12 +4,21 @@ import "./home.css"
 
 const Home = () => {
   const [page, setPage] = useState(1)
+  const [search, setSearch] = useState("")
+
   const productsPerPage = 6
 
-  const totalPages = Math.ceil(products.length / productsPerPage)
-  const start = (page - 1) * productsPerPage
-  const currentProducts = products.slice(start, start + productsPerPage)
+  // 🔍 Filtrar productos
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  )
 
+  // 📄 Paginación
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage)
+  const start = (page - 1) * productsPerPage
+  const currentProducts = filteredProducts.slice(start, start + productsPerPage)
+
+  // 🛒 Agregar al carrito
   const addToCart = (product) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || []
     cart.push(product)
@@ -19,23 +28,47 @@ const Home = () => {
 
   return (
     <div className="home">
-      <h1 className="title">Productos</h1>
+      <h1 className="title">PRODUCTOS</h1>
 
+      <div className="search-container">
+  <input
+    type="text"
+    placeholder="🔍 Buscar productos..."
+    className="search-input"
+    value={search}
+    onChange={(e) => {
+      setSearch(e.target.value)
+      setPage(1)
+    }}
+    />
+    </div>
+
+      {/* 🛍️ PRODUCTOS */}
       <div className="products-grid">
-        {currentProducts.map((p) => (
-          <div className="product-card" key={p.id}>
-            <img src={p.image} alt={p.name} />
-            <h3>{p.name}</h3>
-            <p>${p.price.toLocaleString()}</p>
-            <button onClick={() => addToCart(p)}>Agregar al carrito</button>
+        {currentProducts.map((product) => (
+          <div className="product-card" key={product.id}>
+            <img src={product.image} alt={product.name} />
+
+            <h3>{product.name}</h3>
+
+            <p>${product.price.toLocaleString()}</p>
+
+            <button onClick={() => addToCart(product)}>
+              Agregar al carrito
+            </button>
           </div>
         ))}
       </div>
 
-      {/* PAGINACIÓN COMPLETA */}
+      {/* 📄 PAGINACIÓN */}
       <div className="pagination">
-        <button disabled={page === 1} onClick={() => setPage(1)}>«</button>
-        <button disabled={page === 1} onClick={() => setPage(page - 1)}>‹</button>
+        <button disabled={page === 1} onClick={() => setPage(1)}>
+          «
+        </button>
+
+        <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+          ‹
+        </button>
 
         {[...Array(totalPages)].map((_, i) => (
           <button
@@ -47,8 +80,13 @@ const Home = () => {
           </button>
         ))}
 
-        <button disabled={page === totalPages} onClick={() => setPage(page + 1)}>›</button>
-        <button disabled={page === totalPages} onClick={() => setPage(totalPages)}>»</button>
+        <button disabled={page === totalPages} onClick={() => setPage(page + 1)}>
+          ›
+        </button>
+
+        <button disabled={page === totalPages} onClick={() => setPage(totalPages)}>
+          »
+        </button>
       </div>
     </div>
   )

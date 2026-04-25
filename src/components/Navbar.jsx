@@ -1,23 +1,23 @@
 import { Link } from "react-router-dom"
+import "./Navbar.css"
 
-export default function Navbar() {
+const Navbar = () => {
   return (
-    <nav style={{
-      background: "white",
-      padding: "15px 20px",
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      boxShadow: "0 2px 5px rgba(0,0,0,0.1)"
-    }}>
-      <h2 style={{ margin: 0 }}>Almons</h2>
+    <nav className="navbar">
+      {/* LOGO */}
+      <Link to="/" className="logo">
+        ALMONS
+      </Link>
 
-      <div style={{ display: "flex", gap: "10px" }}>
-        <Link to="/"><button className="btn">Inicio</button></Link>
-        <Link to="/cart"><button className="btn">Carrito</button></Link>
-        <Link to="/login"><button className="btn">iniciar sesión</button></Link>
-         <Link to="/login"><button className="btn">Registrarse</button></Link>
+      {/* MENÚ */}
+      <div className="nav-links">
+        <Link to="/">Inicio</Link>
+        <Link to="/cart">Carrito</Link>
+        <Link to="/login">Iniciar sesión</Link>
+        <Link to="/register">Registrarse</Link>
       </div>
     </nav>
   )
 }
+
+export default Navbar

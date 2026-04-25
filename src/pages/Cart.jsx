@@ -1,54 +1,65 @@
-import { useCartStore } from "../store/cartStore"
-import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+import "./cart.css"
 
-export default function Cart() {
-  const cart = useCartStore((state) => state.cart)
-  const removeFromCart = useCartStore((state) => state.removeFromCart)
+const Cart = () => {
+  const [cart, setCart] = useState([])
 
-  const total = cart.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  )
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || []
+    setCart(storedCart)
+  }, [])
+
+  const removeFromCart = (index) => {
+    const newCart = [...cart]
+    newCart.splice(index, 1)
+
+    setCart(newCart)
+    localStorage.setItem("cart", JSON.stringify(newCart))
+  }
+
+  const clearCart = () => {
+    setCart([])
+    localStorage.removeItem("cart")
+  }
+
+  const total = cart.reduce((acc, item) => acc + item.price, 0)
 
   return (
-    <div>
-      <h1>Carrito</h1>
+    <div className="cart-container">
+      <h1>🛒 Carrito de Compras</h1>
 
-      <p>Total productos: {cart.length}</p>
-      <p>Total a pagar: ${total}</p>
+      {cart.length === 0 ? (
+        <p className="empty">El carrito está vacío</p>
+      ) : (
+        <>
+          <div className="cart-grid">
+            {cart.map((item, index) => (
+              <div className="cart-card" key={index}>
+                <img src={item.image} alt={item.name} />
 
-      {cart.map((item) => (
-        <div key={item.id}>
-          <h3>{item.title}</h3>
-          <p>Precio: ${item.price}</p>
-          <p>Cantidad: {item.quantity}</p>
+                <div className="cart-info">
+                  <h3>{item.name}</h3>
+                  <p>${item.price.toLocaleString()}</p>
 
-          <button onClick={() => removeFromCart(item.id)}>
-            ❌ Eliminar
-          </button>
-         
-          <Link to="/checkout">
-        <button> Ir a pagar</button>
-        </Link>
-        
-        </div>
-        
-      ))}
+                  <button onClick={() => removeFromCart(index)}>
+                    Eliminar
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
 
-      <div style={{ padding: "10px" }}></div>
-      <div style={{
-      border: "1px solid gray",
-      margin: "10px 0",
-      padding: "10px"
-     }}></div>
+          <div className="cart-footer">
+            <h2>Total: ${total.toLocaleString()}</h2>
+
+            <button className="clear-btn" onClick={clearCart}>
+              Vaciar carrito
+            </button>
+          </div>
+        </>
+      )}
     </div>
   )
 }
 
-<div style={{
-  background: "white",
-  padding: "15px",
-  marginBottom: "10px",
-  borderRadius: "10px",
-  boxShadow: "0 2px 5px rgba(0,0,0,0.1)"
-}}></div>
+export default Cart
