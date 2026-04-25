@@ -2,7 +2,7 @@
   "name": "reto_fullstack",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://TU_USUARIO.github.io/reto_fullstack",
+  "homepage": "https://github.com/alissonMontoya/reto_fullstack",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
