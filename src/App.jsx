@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Home from "./pages/Home"
 import Cart from "./pages/Cart"
 import Checkout from "./pages/Checkout"
+import { HashRouter, Routes, Route } from "react-router-dom"
 
 import Login from "./auth/Login"
 import Register from "./auth/Register"
@@ -10,7 +10,7 @@ import Navbar from "./components/Navbar"
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Navbar />
 
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "20px" }}>
@@ -24,7 +24,7 @@ function App() {
           <Route path="/register" element={<Register />} />
         </Routes>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
