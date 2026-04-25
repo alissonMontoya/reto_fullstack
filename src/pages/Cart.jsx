@@ -24,6 +24,13 @@ const Cart = () => {
 
   const total = cart.reduce((acc, item) => acc + item.price, 0)
 
+  const handleCheckout = () => {
+  alert("✅ Compra realizada con éxito")
+
+  setCart([])
+  localStorage.removeItem("cart")
+}
+
   return (
     <div className="cart-container">
       <h1>🛒 Carrito de Compras</h1>
@@ -51,6 +58,10 @@ const Cart = () => {
 
           <div className="cart-footer">
             <h2>Total: ${total.toLocaleString()}</h2>
+            
+            <button className="checkout-btn" onClick={handleCheckout}>
+                Finalizar compra
+             </button>
 
             <button className="clear-btn" onClick={clearCart}>
               Vaciar carrito
