@@ -1,4 +1,5 @@
 import { useState } from "react"
+import "./auth.css"
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -16,38 +17,32 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    if (!form.email || !form.password) {
-      alert("Completa todos los campos")
+    const user = JSON.parse(localStorage.getItem("user"))
+
+    if (!user) {
+      alert("No hay usuario registrado")
       return
     }
 
-    console.log("Login:", form)
-    alert("Inicio de sesión exitoso")
+    if (form.email === user.email && form.password === user.password) {
+      alert("Inicio de sesión exitoso ✅")
+    } else {
+      alert("Datos incorrectos ❌")
+    }
   }
 
   return (
-    <div>
-      <h2>Iniciar sesión</h2>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2>Iniciar sesión</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Correo"
-          value={form.email}
-          onChange={handleChange}
-        />
+        <form onSubmit={handleSubmit} className="auth-form">
+          <input name="email" placeholder="Correo" onChange={handleChange} />
+          <input name="password" placeholder="Contraseña" onChange={handleChange} />
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Contraseña"
-          value={form.password}
-          onChange={handleChange}
-        />
-
-        <button type="submit">Entrar</button>
-      </form>
+          <button type="submit">Entrar</button>
+        </form>
+      </div>
     </div>
   )
 }

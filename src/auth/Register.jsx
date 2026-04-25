@@ -1,4 +1,5 @@
 import { useState } from "react"
+import "./auth.css"
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -28,52 +29,26 @@ const Register = () => {
       return
     }
 
-    console.log("Registro:", form)
+    // guardar usuario (SIMULADO para el taller)
+    localStorage.setItem("user", JSON.stringify(form))
+
     alert("Usuario registrado correctamente 🎉")
   }
 
   return (
-    <div>
-      <h2>Crear cuenta</h2>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2>Crear cuenta</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="nombre"
-          placeholder="Nombre"
-          value={form.nombre}
-          onChange={handleChange}
-        />
+        <form onSubmit={handleSubmit} className="auth-form">
+          <input name="nombre" placeholder="Nombre" onChange={handleChange} />
+          <input name="apellido" placeholder="Apellido" onChange={handleChange} />
+          <input name="email" placeholder="Correo" onChange={handleChange} />
+          <input name="password" placeholder="Contraseña" onChange={handleChange} />
 
-        <input
-          type="text"
-          name="apellido"
-          placeholder="Apellido"
-          value={form.apellido}
-          onChange={handleChange}
-        />
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Correo"
-          value={form.email}
-          onChange={handleChange}
-
-        />
-
-        <input
-          type="password"
-          name="password"
-          placeholder="Contraseña"
-          value={form.password}
-          onChange={handleChange}
-          
-        />
-
-
-        <button type="submit">Registrarse</button>
-      </form>
+          <button type="submit">Registrarse</button>
+        </form>
+      </div>
     </div>
   )
 }
